@@ -487,6 +487,8 @@ public class SensorFusion implements SensorEventListener, Observer {
         return this.wiFiPositioning.getFloor();
     }
 
+    public Location getLocationData(){return locationData;}
+
     /**
      * Method used for converting an array of orientation angles into a rotation matrix.
      *
@@ -963,5 +965,14 @@ public class SensorFusion implements SensorEventListener, Observer {
     }
 
     //endregion
+    /**
+     * 获取当前设备朝向角度（单位：度），0° 表示正北，顺时针递增。
+     */
+    public float getHeading() {
+        float heading = (float) Math.toDegrees(orientation[0]);
+        if (heading < 0) heading += 360;
+        return heading;
+    }
+
 
 }

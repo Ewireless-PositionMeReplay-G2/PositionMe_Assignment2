@@ -1,8 +1,6 @@
 package com.openpositioning.PositionMe.sensors;
 
 import android.graphics.PointF;
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -68,7 +66,7 @@ public class ParticleFilter {
                 initY = gnssPos.y;
             }
             // 设定初始粒子散布范围（例如在初始中心附近随机散布5个单位的范围）
-            double initSpread = 6.0;
+            double initSpread = 5.0;
             for (int i = 0; i < N; i++) {
                 double rx = initX + (rand.nextDouble() * 2 - 1) * initSpread;
                 double ry = initY + (rand.nextDouble() * 2 - 1) * initSpread;
@@ -102,14 +100,11 @@ public class ParticleFilter {
         if (wifiPos != null) {
             // 使用 WiFi 数据进行观测校正
             measurement = wifiPos;
-
-            Log.d("partical","wifi measurement:"+measurement);
             measurementStd = 1.0;    // 假设 WiFi 定位误差的标准差为约3个单位（可调参数）
         } else if (gnssPos != null) {
             // WiFi 数据不可用，使用 GNSS 数据进行校正
             measurement = gnssPos;
             measurementStd = 5.0;    // 假设 GNSS 定位误差标准差为约5个单位
-            Log.d("partical","gnss measurement:"+measurement);
         }
         if (measurement != null) {
             // 如果有观测数据，计算每个粒子相对于观测位置的概率（距离越近权重越大）
