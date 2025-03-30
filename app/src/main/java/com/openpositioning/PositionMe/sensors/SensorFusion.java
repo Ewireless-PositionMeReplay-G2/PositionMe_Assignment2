@@ -472,7 +472,7 @@ public class SensorFusion implements SensorEventListener, Observer {
     }
 
     /**
-     * Method to get user position obtained using {@link WiFiPositioning}.
+ * Method to get user position obtained using {@link WiFiPositioning}.
      *
      * @return {@link LatLng} corresponding to user's position.
      */
